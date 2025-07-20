@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asta's Bites</title>
+  <link rel="stylesheet" href="styles.css" />
+  </style:root {
+    --bg: #fff;
+    --text: #111;
+    --accent: #d81b60;
+    --card: #fce4ec;
+  }
+  
+  body.dark {
+    --bg: #121212;
+    --text: #eee;
+    --accent: #f06292;
+    --card: #1f1f1f;
+  }
+  
+  body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+  }  >
+</head>
+<script>
+  const body = document.body;
+  const currentMode = localstorage.getItem("theme");
+  if (currentMode == "dark") body.classList.add("dark");
+  
+  function toggleDarkMode() {
+      body.classList.toggle("dark");
+      localStorage.setItem("theme", body.classList.contains("dark") ? "dark" : "light")
+  }
+  function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+  }
+</script>
+<body>
+    <nav class="sticky-header">
+        <div class="logo">
+            <div class="logo-icon">AB</div>
+            <span class="logo-text">Asta's Bites</span>
+        </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="about.html">📖 About</a></li>
+        <li><a href="admin-secured.html">🛠️ Admin</a></li>
+        <li class="dropdown">
+          <a href="#">Services</a>
+          <ul class="dropdown-content">
+            <li><a href="dinein.html">Dine-In</a></li>
+            <li><a href="delivery.html">Delivery</a></li>
+          </ul>
+        </li>        
+        <li><a href="#contact">Contact</a></li>
+        <li></li><a href="reservations.html">Manage Reservation</a></li>
+        <li><button class="dark-toggle" onclick="toggleDarkMode()">🌙</button></li>
+      </ul>
+    </nav>
+
+  <section class="slider" id="home">
+    <div class="slides">
+        <img src="images/Slider 1.jpeg" alt="Delicious Meals" />
+        <img src="images/Slider 2.jpeg" alt="Fresh Ingredients" />
+        <img src="images/Slider 3.jpeg" alt="Cozy Ambience" />
+      </div>
+  </section>
+
+  <section class="about">
+    <h2>Welcome to Asta's Bites</h2>
+    <p>We craft exquisite meals using fresh, local ingredients, all served in a cozy modern setting with love and detail.</p>
+    <button onclick="openReservation()">Reserve a Table</button>
+  </section>
+
+  <section class="wallet-topup">
+    <h2 style="text-align:center;">Top Up Your Wallet</h2>
+    <form id="topupForm" style="max-width:400px;margin:auto;padding:20px;background:var(--card);border-radius:12px;">
+      <input type="number" id="topupAmount" placeholder="Enter Amount (₦)" required style="width:100%;margin:10px 0;padding:10px;border-radius:6px;border:1px solid #ccc;">
+      <select id="topupMethod" required style="width:100%;margin:10px 0;padding:10px;border-radius:6px;border:1px solid #ccc;">
+        <option value="">Select Payment Method</option>
+        <option value="card">💳 Card</option>
+        <option value="transfer">🏦 Transfer</option>
+        <option value="cash">💵 Cash</option>
+      </select>
+      <button type="submit" style="width:100%;padding:10px;background:var(--accent);color:white;border:none;border-radius:6px;cursor:pointer;">Top Up</button>
+      <div id="topupMessage" style="margin-top:10px;text-align:center;"></div>
+    </form>
+  </section>
+
+  <section class="menu-section" id="menu">
+    <h2>Our Featured Dishes</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="images/Cheeseburger.jpg" alt="Classic Cheeseburger">
+        <h4><a href="order-dinein.html?item=Classic%20Cheeseburger" style="text-decoration: none; color: inherit;">Classic Cheeseburger</a></h4>        
+        <p>Juicy grilled beef patty, cheddar, pickles, brioche bun - ₦12,000</p>
+      </div>
+      <div class="menu-item">
+        <img src="images/Alfredo.jpg" alt="Spaghetti Alfredo">
+        <h4><a href="order-dinein.html?item=Spaghetti%20Chicken%20Fettuccine%20Alfredo" style="text-decoration: none; color: inherit;">Spaghetti Chicken Fettucine Alfredo</a></h4>        
+        <p>Creamy Italian pasta with pancetta and egg yolk sauce - ₦17,000</p>
+      </div>
+      <div class="menu-item">
+        <img src="images/Avocado Garden Salad.jpg" alt="Avocado Garden Salad">
+        <h4><a href="order-dinein.html?item=Avocado%20Garden%20Salad" style="text-decoration: none; color: inherit;">Avocado Garden Salad</a></h4>
+        <p>Fresh greens, ripe avocado, nuts, and citrus vinaigrette - ₦10,000</p>
+      </div>
+      <div class="menu-item">
+        <img src="images/Hot Dogs.jpg" alt="Sausages">
+        <h4><a href="order-dinein.html?item=Sausages%20" style="text-decoration: none; color: inherit;">Sausages</a></h4>
+        <p>Soft bread, ketchup, mustard, sasuages, crispy fries and condiments - ₦3,000</p>
+      </div>
+      <div class="menu-item">
+        <img src="images/Fajita Bread.jpg" alt="Fajita Bread">
+        <h4><a href="order-dinein.html?item=Fajita%20Bread" style="text-decoration: none; color: inherit;">Fajita Bread</a></h4>
+        <p>Fluffy bread, butter, chicken, beef, ketchup, and pepper - ₦15,000</p>
+      </div>
+      <div class="menu-item">
+        <img src="images/Jollof Rice.jpg" alt="Jollof Rice">
+        <h4><a href="order-dinein.html?item=Jollof%20Rice" style="text-decoration: none; color: inherit;">Jollof Rice</a></h4>
+        <p>Cooked rice, pepper, spice, chicken, beef, plantains, and greens - ₦4,000</p>
+      </div>
+      <div class="menu-item">
+        <img src="images/Coke.jpg" alt="Coke">
+        <h4><a href="order-dinein.html?item=Coke" style="text-decoration:none; color:inherit;">Coke</a></h4>
+        <p>₦800</p>
+      </div>
+      
+      <div class="menu-item">
+        <img src="images/Fanta.jpg" alt="Fanta">
+        <h4><a href="order-dinein.html?item=Fanta" style="text-decoration:none; color:inherit;">Fanta</a></h4> 
+        <p>₦800</p>
+      </div>
+      
+      <div class="menu-item">
+        <img src="images/Sprite.jpg" alt="Sprite">
+        <h4><a href="order-dinein.html?item=Sprite" style="text-decoration:none; color:inherit;">Sprite</a></h4>
+        <p>₦800</p>
+      </div>
+      
+      <div class="menu-item">
+        <img src="images/Slushies.jpg" alt="Slushie">
+        <h4><a href="order-dinein.html?item=Fruit%Slushie" style="text-decoration:none; color:inherit;">Fruit Slushie</a></h4>
+        <p>₦2500</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="contact-form">
+    <h2>Send Us a Message</h2>
+    <form id="contact-us-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer id="contact">
+    <p>Connect with us:</p>
+    <div class="socials">
+      <a href="https://facebook.com/Asta" target="_blank">Facebook</a>
+      <a href="https://instagram.com/i_am_snilloc" target="_blank">Instagram</a>
+      <a href="https://twitter.com/Snilloc_09" target="_blank">Twitter</a>
+      <a href="https://wa.me/+2349110116013" target="_blank">WhatsApp</a>
+    </div>
+  </footer>
+
+  <div id="reservation-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeReservation()">&times;</span>
+      <h2>Reserve a Table</h2>
+      <form id="reservation-form">
+        <input type="text" placeholder="Your Name" required />
+        <input type="date" required />
+        <input type="time" required />
+        <textarea placeholder="Message or Special Requests"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById("nav-menu");
+      navMenu.classList.toggle("show");
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    }
+
+    function openReservation() {
+      const modal = document.getElementById("reservation-modal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    function closeReservation() {
+      const modal = document.getElementById("reservation-modal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function updateWalletUI() {
+      const el = document.getElementById("walletDisplay");
+      if (el) {
+        const bal = parseInt(localStorage.getItem("wallet_balance")) || 0;
+        el.textContent = `Wallet: ₦${bal}`;
+      }
+    }
+
+    function topUpWallet(amount) {
+      let current = parseInt(localStorage.getItem("wallet_balance")) || 0;
+      current += amount;
+      localStorage.setItem("wallet_balance", current);
+      updateWalletUI();
+      alert("✅ Wallet funded with ₦" + amount);
+    }
+
+    function topUpWalletFromInput() {
+      const amount = parseInt(document.getElementById("walletAmount").value);
+      if (!amount || amount <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+      }
+      topUpWallet(amount);
+      document.getElementById("walletAmount").value = "";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
+      updateWalletUI();
+    });
+  </script>
+</body>
+</html>

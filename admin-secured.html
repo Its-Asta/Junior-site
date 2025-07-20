@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin | Asta's Bites</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    body {
+      background: var(--bg);
+      padding: 20px;
+    }
+    .admin-login, .admin-panel {
+      max-width: 800px;
+      margin: auto;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      animation: fadeIn 0.6s ease-out;
+    }
+    .admin-login {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .admin-login input {
+      padding: 14px;
+      width: 80%;
+      margin-top: 20px;
+      font-size: 16px;
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+    }
+    .admin-login button {
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .admin-login button:hover {
+      background: #c2185b;
+    }
+    .admin-header {
+      background: var(--accent);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .admin-header h2 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .admin-header p {
+      margin: 6px 0 0;
+      font-size: 16px;
+    }
+    .admin-content {
+      padding: 30px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .stat-box {
+      background: var(--bg);
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .stat-box:hover {
+      transform: scale(1.05);
+    }
+    .stat-box h4 {
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 18px;
+    }
+    .stat-box p {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px 0 10px;
+    }
+    .section-header h3 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--accent);
+    }
+    .orders-list pre {
+      max-height: 220px;
+      overflow-y: auto;
+      background: var(--bg);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .reservations-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .reservations-list li {
+      padding: 8px 12px;
+      background: var(--bg);
+      margin-bottom: 6px;
+      border-left: 4px solid var(--accent);
+      border-radius: 4px;
+    }
+    .btn-clear {
+      background: var(--accent);
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    .btn-clear:hover {
+      background: #c2185b;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-login" id="loginForm">
+    <h2>🔐 Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Enter password">
+    <button onclick="checkAdmin()">Login</button>
+    <div id="loginStatus" style="margin-top: 12px; color: red;"></div>
+  </div>
+
+  <div class="admin-panel" id="adminPanel" style="display:none">
+    <div class="admin-header">
+      <h2>Welcome, Admin</h2>
+      <p>Your dashboard to manage orders, reservations & funds</p>
+    </div>
+
+    <div class="admin-content">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <h4>Orders</h4>
+          <p id="count-orders">0</p>
+        </div>
+        <div class="stat-box">
+          <h4>Reservations</h4>
+          <p id="count-reservations">0</p>
+        </div>
+        <div class="stat-box">
+          <h4>Wallet Balance</h4>
+          <p id="stat-wallet-balance">₦0</p>
+        </div>
+        <div class="stat-box">
+            <h4>Dine-In Orders</h4>
+            <p id="count-dinein">0</p>
+        </div>
+
+      </div>
+
+      <div class="section-header">
+        <h3>🍽️ Dine-In Orders</h3>
+        <button class="btn-clear" onclick="clearDinein()">Clear Dine-In</button>
+      </div>
+      <div class="orders-list">
+        <pre id="dineinDisplay">Loading…</pre>
+      </div>
+      
+      <div class="section-header">
+        <h3>🧾 Delivery Orders</h3>
+        <button class="btn-clear" onclick="clearOrders()">Clear Orders</button>
+      </div>
+      <div class="orders-list">
+        <pre id="ordersDisplay">Loading…</pre>
+      </div>
+
+      <div class="section-header">
+        <h3>🪑 Table Reservations</h3>
+        <button class="btn-clear" onclick="clearReservations()">Clear Reservations</button>
+      </div>
+      <div class="reservations-list">
+        <ul id="reservationList">Loading…</ul>
+      </div>
+      <div class="section-header"> 
+        <h3>💳 Wallet Top-up History</h3>
+        <button class="btn-clear" onclick="clearWalletTopups()">Clear Logs</button>
+      </div>
+      <div class="orders-list">
+        <pre id="walletTopupsDisplay">Loading…</pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkAdmin() {
+        const pass = document.getElementById("adminPass").value.trim();
+        if (pass === "astaadmin") {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("adminPanel").style.display = "block";
+            showAdminData();
+        } else {
+            document.getElementById("loginStatus").textContent = "❌ Incorrect password.";
+        }
+    }
+
+    function showAdminData() {
+      const orders = JSON.parse(localStorage.getItem("delivery_orders") || "[]");
+      const res = JSON.parse(localStorage.getItem("dinein_reservations") || "[]");
+      const dineinOrders = JSON.parse(localStorage.getItem("dinein_orders") || "[]");
+      const wallet = parseInt(localStorage.getItem("wallet_balance") || "0");
+
+      document.getElementById("count-orders").textContent = orders.length;
+      document.getElementById("count-reservations").textContent = res.length;
+      document.getElementById("count-dinein").textContent = dineinOrders.length;
+      document.getElementById("stat-wallet-balance").textContent = `₦${wallet}`;
+
+      document.getElementById("ordersDisplay").textContent = orders.length
+        ? orders.map(o => `• ${o.name} — ₦${o.total} @ ${o.location}\n  Time: ${new Date(o.timestamp).toLocaleString()}`).join("\n\n")
+        : "No orders yet.";
+
+      const resList = document.getElementById("reservationList");
+      resList.innerHTML = "";
+      res.forEach(r => {
+        const li = document.createElement("li");
+        li.textContent = `Table ${r.table} — ${r.name}`;
+        resList.appendChild(li);
+      });
+
+      document.getElementById("dineinDisplay").textContent = dineinOrders.length
+        ? dineinOrders.map(o =>
+            `• ${o.name} — ₦${o.total} @ Table ${o.table}\n  Time: ${new Date(o.timestamp).toLocaleString()}`
+          ).join("\n\n")
+        : "No dine-in orders yet.";
+
+    }
+
+    function clearOrders() {
+      if (confirm("Clear all delivery orders?")) {
+        localStorage.removeItem("delivery_orders");
+        showAdminData();
+      }
+    }
+
+    function clearReservations() {
+      if (confirm("Clear all reservations?")) {
+        localStorage.removeItem("dinein_reservations");
+        reservations = [];
+        updateReservationList();
+        showAdminData();
+      }
+    }
+
+    function clearDinein() {
+        if (confirm("Clear all dine-in orders?")) {
+            localStorage.removeItem("dinein_orders");
+            showAdminData();
+        }
+    }
+
+    function showAdminData() {
+  const orders = JSON.parse(localStorage.getItem("delivery_orders") || "[]");
+  const res = JSON.parse(localStorage.getItem("dinein_reservations") || "[]");
+  const wallet = parseInt(localStorage.getItem("wallet_balance") || "0");
+  const topups = JSON.parse(localStorage.getItem("wallet_topups") || "[]");
+
+  document.getElementById("count-orders").textContent = orders.length;
+  document.getElementById("count-reservations").textContent = res.length;
+  document.getElementById("stat-wallet-balance").textContent = `₦${wallet}`;
+
+  document.getElementById("ordersDisplay").textContent = orders.length
+    ? orders.map(o => `• ${o.name} — ₦${o.total} @ ${o.location}\n  Time: ${new Date(o.timestamp).toLocaleString()}`).join("\n\n")
+    : "No orders yet.";
+
+  const resList = document.getElementById("reservationList");
+  resList.innerHTML = "";
+  res.forEach(r => {
+    const li = document.createElement("li");
+    li.textContent = `Table ${r.table} — ${r.name}`;
+    resList.appendChild(li);
+  });
+
+  document.getElementById("walletTopupsDisplay").textContent = topups.length
+    ? topups.map(t => `₦${t.amount} via ${t.method}\n@ ${new Date(t.timestamp).toLocaleString()}`).join("\n\n")
+    : "No top-ups yet.";
+}
+
+function clearWalletTopups() {
+  if (confirm("Clear all wallet top-up logs?")) {
+    localStorage.removeItem("wallet_topups");
+    showAdminData();
+  }
+}
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

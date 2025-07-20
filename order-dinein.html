@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dine-In Order | Asta's Bites</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --bg: #f0fff0;
+      --card: #ffffff;
+      --accent: #2e7d32;
+      --text: #222;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: var(--accent);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-icon {
+      background: white;
+      color: var(--accent);
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 50%;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #1b5e20;
+    }
+    .status {
+      margin-top: 25px;
+      font-weight: bold;
+      color: green;
+      background: #e8f5e9;
+      padding: 20px;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+    .res-list {
+      background: #f9fbe7;
+      padding: 15px;
+      margin-top: 20px;
+      border-left: 6px solid #aed581;
+    }
+    .res-list ul {
+      padding-left: 18px;
+    }
+    .res-list li {
+      margin-bottom: 8px;
+    }
+    .res-btn {
+      font-size: 12px;
+      margin-left: 8px;
+      background: #eee;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 2px 6px;
+      cursor: pointer;
+    }
+    .res-btn:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <nav class="sticky-header">
+    <div class="logo">
+      <div class="logo-icon">AB</div>
+      <span class="logo-text">Asta's Bites</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="about.html">📖 About</a></li>
+      <li><a href="admin-secured.html">🛠️ Admin</a></li>
+      <li><button class="dark-toggle" onclick="toggleDarkMode()">🌙</button></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div>
+      <span class="logo-icon">AB</span>
+      <strong style="margin-left: 10px;">Asta's Bites</strong>
+    </div>
+    <a href="dinein.html" style="color:white;text-decoration:none;">← Back</a>
+  </header>
+
+  <div class="container">
+    <h2>Dine-In Order Form</h2>
+
+    <form id="dineinOrderForm">
+      <label for="nameInput">Full Name</label>
+      <input type="text" id="nameInput" placeholder="Enter your name" required />
+      <div id="reservation-result"></div>
+
+      <label for="tableNumber">Select Your Table</label>
+      <select id="tableNumber" required>
+        <option value="">-- Select Available Table --</option>
+      </select>
+
+      <h3>Food</h3>
+      <label>Jollof Rice (₦4000)</label>
+      <input type="number" min="0" id="jollof" value="0" />
+
+      <label>Classic Cheeseburger (₦12000)</label>
+      <input type="number" min="0" id="burger" value="0" />
+
+      <label>Spaghetti Chicken Fettuccine Alfredo (₦17000)</label>
+      <input type="number" min="0" id="pasta" value="0" />
+
+      <label>Avocado Garden Salad (₦10000)</label>
+      <input type="number" min="0" id="salad" value="0" />
+
+      <label>Sausages (₦3000)</label>
+      <input type="number" min="0" id="sausage" value="0" />
+
+      <label>Fajita Bread (₦15000)</label>
+      <input type="number" min="0" id="bread" value="0" />
+
+      <h3>Drinks</h3>
+      <label>Coke (₦800)</label>
+      <input type="number" min="0" id="coke" value="0" />
+
+      <label>Fanta (₦850)</label>
+      <input type="number" min="0" id="fanta" value="0" />
+
+      <label>Sprite (₦800)</label>
+      <input type="number" min="0" id="sprite" value="0" />
+
+      <label>Fruit Slushie (₦2500)</label>
+      <input type="number" min="0" id="slushie" value="0" />
+
+      <h3>Payment Method</h3>
+      <label><input type="radio" name="paymentMethod" value="wallet" checked> Wallet</label>
+      <label><input type="radio" name="paymentMethod" value="card"> Card</label>
+      <label><input type="radio" name="paymentMethod" value="cash"> Cash</label>
+      <label><input type="radio" name="paymentMethod" value="transfer"> Bank Transfer</label>
+
+      <button type="submit">Place Order</button>
+    </form>
+
+    <div id="confirmationMsg"></div>
+    <div class="status" id="dineinStatus"></div>
+    <div id="walletDisplay" class="wallet-box"></div>
+
+    <div class="res-list">
+      <h4>🪑 Current Table Reservations</h4>
+      <ul id="reservationList"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

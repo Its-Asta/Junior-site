@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Asta's Bites</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: linear-gradient(to bottom, #fff5f0, #fdecea);
+    }
+    .about-container {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .about-container h2 {
+      color: #d81b60;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .about-container p {
+      line-height: 1.7;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="sticky-header">
+    <div class="logo">
+      <div class="logo-icon">AB</div>
+      <span class="logo-text">Asta's Bites</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="about.html">📖 About</a></li>
+        <li class="dropdown">
+          <a href="#">Services</a>
+          <ul class="dropdown-content">
+            <li><a href="dinein.html">Dine-In</a></li>
+            <li><a href="delivery.html">Delivery</a></li>
+          </ul>
+        </li>
+      <li><button class="dark-toggle" onclick="toggleDarkMode()">🌙</button></li>
+    </ul>
+  </nav>
+
+  <section class="about">
+    <div class="about-container">
+      <h2>Welcome to Asta's Bites</h2>
+      <p>
+        At Asta’s Bites, we believe food should be fresh, flavorful, and made with heart. From cozy dine-ins to lightning-fast deliveries, we’ve built our service around delighting every customer, every time.
+      </p>
+      <p>
+        Our chefs use only the finest local ingredients to prepare gourmet meals that fuse tradition with innovation. Whether you're craving a quiet table or a doorstep delivery, Asta’s Bites brings you comfort, culture, and culinary satisfaction.
+      </p>
+      <p>
+        We’re proudly based in Abuja and always looking to serve our community better — thank you for dining with us ❤️.
+      </p>
+      <p style="text-align:center;margin-top:30px;">
+        <strong>— The Asta’s Bites Team</strong>
+      </p>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

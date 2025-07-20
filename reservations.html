@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reservations | Asta's Bites</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: linear-gradient(to bottom, #fff6f0, #fbe9e7);
+    }
+
+    .hero-banner {
+      background: url('images/reservations-hero.jpg') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 2px 2px 6px #000;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .reservation-container {
+      display: flex;
+      justify-content: center;
+      margin-top: -60px;
+      padding: 40px 20px;
+    }
+
+    .reservation-card {
+      background: #ffffffdd;
+      border-left: 6px solid #d81b60;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 450px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .reservation-card h2 {
+      color: #d81b60;
+      margin-bottom: 20px;
+    }
+
+    .reservation-card input,
+    .reservation-card button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .reservation-card input {
+      background: #fce4ec;
+      color: #333;
+    }
+
+    .reservation-card button {
+      background: #d81b60;
+      color: white;
+      cursor: pointer;
+    }
+
+    .reservation-card button:hover {
+      background: #ad1457;
+    }
+
+    #reservation-result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    :root {
+      --bg: #fff;
+      --text: #111;
+      --accent: #d81b60;
+      --card: #fce4ec;
+    }
+    body.dark {
+      --bg: #121212;
+      --text: #eee;
+      --accent: #f06292;
+      --card: #1f1f1f;
+    }
+    body {
+        background: var(--bg);
+        color: var(--text);
+        transition: background 0.3s, color 0.3s;
+    }
+  </style>
+</head>
+<body>
+    <nav class="sticky-header">
+        <div class="logo">
+            <div class="logo-icon">AB</div>
+            <span class="logo-text">Asta's Bites</span>
+        </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="about.html">📖 About</a></li>
+        <li><a href="admin-secured.html">🛠️ Admin</a></li>
+        <li class="dropdown">
+          <a href="#">Services</a>
+          <ul class="dropdown-content">
+            <li><a href="dinein.html">Dine-In</a></li>
+            <li><a href="delivery.html">Delivery</a></li>
+          </ul>
+        </li>        
+        <li><a href="#contact">Contact</a></li>
+        <li></li><a href="reservations.html">Manage Reservation</a></li>
+        <li><button class="dark-toggle" onclick="toggleDarkMode()">🌙</button></li>
+      </ul>
+    </nav>
+
+    <div class="hero-banner">Reserve a Table</div>
+    
+    <div class="reservation-container">
+        <div class="reservation-card">
+            <h2>Check Reservation</h2>
+            <input type="text" id="nameInput" placeholder="Enter your name" />
+            <div id="reservation-result"></div>
+        </div>
+    </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
